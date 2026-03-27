@@ -1,0 +1,31 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import "./var.css";
+@import "./element-theme.css";
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+/* Global scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-300) var(--secondary-100);
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+.scroller::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scroller:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color-thumb);
+}
+.scroller:hover::-webkit-scrollbar-track {
+    background: var(--scrollbar-color-track);
+}
+
+.scroller:hover {
+    --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
+}
