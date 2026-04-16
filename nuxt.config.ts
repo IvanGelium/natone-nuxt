@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: '.',
-  buildDir: '.nuxt-build',
+  buildDir: '.nuxt',
   css: ['element-plus/dist/index.css', '@/assets/css/main.css'],
   modules: ['@element-plus/nuxt'],
   postcss: {
