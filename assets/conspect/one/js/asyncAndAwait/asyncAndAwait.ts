@@ -1,5 +1,5 @@
 import { codeBlock } from '../../../../../utils'
-import Practice from './Practice.vue'
+import Practice from '../../../../../components/practice/AsyncAndAwait.vue'
 
 const path = 'asyncAndAwait'
 

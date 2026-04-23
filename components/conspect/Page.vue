@@ -2,16 +2,15 @@
 import Mdblock from '../Mdblock.vue'
 
 const props = defineProps<{
-  content: string
+  content: string | undefined
   link: string
   practice: boolean
 }>()
-
 const { content } = toRefs(props)
 </script>
 
 <template>
-  <div class="flex flex-col gap-20">
+  <div class="h-full flex flex-col gap-20">
     <div v-if="practice" class="flex flex-col gap-4">
       <Mdblock content="### Практика" />
       <div>
@@ -22,7 +21,7 @@ const { content } = toRefs(props)
       </div>
     </div>
 
-    <div class="flex flex-col gap-4">
+    <div class="h-full flex flex-col gap-4">
       <Mdblock content="### Конспект" />
       <Mdblock :content="content" />
     </div>

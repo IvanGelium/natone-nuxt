@@ -1,5 +1,5 @@
 import { codeBlock } from '../../../../../utils'
-import Practice from './Practice.vue'
+import Practice from '../../../../../components/practice/Prototype.vue'
 
 const title = 'Prototype'
 const path = 'prototype'

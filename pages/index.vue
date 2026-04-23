@@ -4,7 +4,7 @@ import githubLogo from '~/assets/github.svg'
 </script>
 
 <template>
-  <div class="relative min-h-full overflow-hidden rounded-xl bg-primary px-6 py-10 text-primary md:px-10">
+  <div class="h-full overflow-hidden rounded-xl bg-primary px-6 py-10 text-primary md:px-10">
     <div class="relative mx-auto flex max-w-6xl flex-col gap-10">
       <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-7">

@@ -1,5 +1,5 @@
 import { codeBlock } from '../../../../../utils'
-import Practice from './Practice.vue'
+import Practice from '../../../../../components/practice/ReadbleDataProcess.vue'
 
 const title = `Читаемые преобразования данных`
 const path = 'readble'

@@ -1,11 +1,11 @@
 export type LogMessageType = 'start' | 'error' | 'succeed'
-
+export type userRole = 'guest' | 'user' | 'superuser' | 'admin'
 export interface LogMessage {
   type: LogMessageType
   message: string
   timestamp: Date
 }
-
+export type CreateModalType = 'stage'| 'chapter'| 'conspect' | 'practice'
 export interface FakeFetchConfig<T> {
   /** Задержка ответа в миллисекундах (по умолчанию случайная задержка до 5 секунд */
   delay?: number

@@ -1,4 +1,4 @@
-import Practice from './Practice.vue'
+import Practice from './PromiseCombinators.vue'
 
 const path = 'promiseCombinators'
 

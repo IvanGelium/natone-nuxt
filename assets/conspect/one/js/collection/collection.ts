@@ -1,4 +1,4 @@
-import Practice from './Practice.vue'
+import Practice from '../../../../../components/practice/Collection.vue'
 
 const path = 'collection'
 const title = `Работа с коллекциями`

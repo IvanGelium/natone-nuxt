@@ -14,6 +14,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       githubRepoUrl: process.env.NUXT_PUBLIC_GITHUB_REPO_URL || '',
+      baseApiUrl: process.env.BASE_API_URL || '',
     },
   },
+  routeRules: {
+    // Все запросы на /api/** уйдут на бэкенд
+    '/api/**': {
+      proxy: `${process.env.API_BASE_URL || 'http://localhost:5001'}/**`
+    },
+  }
 })

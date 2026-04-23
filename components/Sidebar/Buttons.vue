@@ -19,32 +19,25 @@ const buttons = [
     isReady: true,
   },
   {
-    name: 'stage-one',
-    label: 'Первый этап',
+    name: 'conspects',
+    label: 'Конспекты',
     icon: Film,
-    route: '/stage-one',
+    route: '/conspects',
     isReady: true,
   },
   {
-    name: 'stage-two',
-    label: 'Второй этап',
-    icon: ZoomIn,
-    route: '/stage-two',
-    isReady: false,
-  },
-  {
-    name: 'stage-three',
-    label: 'Третий этап',
-    icon: QuartzWatch,
-    route: '/stage-three',
-    isReady: false,
-  },
-  {
-    name: 'stage-four',
-    label: 'Четвертый этап',
+    name: 'natoneStarfinder',
+    label: 'Старфайндер',
     icon: IceCream,
-    route: '/stage-four',
-    isReady: false,
+    route: '/starfinder',
+    isReady: false
+  },
+  {
+    name: 'playground',
+    label: 'Песочница',
+    icon: IceCream,
+    route: '/playground',
+    isReady: true
   },
 ]
 
@@ -59,16 +52,18 @@ const primaryButton = computed(() => route.path)
   <div class="flex flex-col overflow-hidden">
     <div class="flex flex-col gap-2">
       <div v-for="(button, index) in buttons" :key="`${index}-${button.label}`">
-        <div v-if="!isSideBarOpen">
-          <NuxtLink :to="button.route">
-            <ElButton
-              class="min-w-full min-h-12"
-              :disabled="button.isReady ? false : true"
-              :icon="button.icon"
-              :type="primaryButton === button.route ? 'primary' : 'default'"
-            />
-          </NuxtLink>
-        </div>
+        <ElTooltip :content="button.label" placement="right">
+          <div v-if="!isSideBarOpen">
+            <NuxtLink :to="button.route">
+              <ElButton
+                class="min-w-full min-h-12"
+                :disabled="button.isReady ? false : true"
+                :icon="button.icon"
+                :type="primaryButton === button.route ? 'primary' : 'default'"
+              />
+            </NuxtLink>
+          </div>
+        </ElTooltip>
         <div v-if="isSideBarOpen">
           <NuxtLink :to="button.route">
             <ElButton
