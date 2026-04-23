@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ArrowRightBold } from '@element-plus/icons-vue';
 const { user, logout } = (useAuth())
 </script>
 
@@ -9,20 +8,21 @@ const { user, logout } = (useAuth())
       Основы Frontend-разработки - практика
     </div>
     <div v-if="!user">
-      <ElButton @click="navigateTo('/login')" type="primary">
+      <ElButton type="primary" @click="navigateTo('/login')">
         Войти
       </ElButton>
     </div>
-    <div class="mr-4" v-else>
+    <div v-else class="mr-4">
       <ElTooltip content="Выйти?">
-        <div 
-        @click="logout"
-        class="flex gap-2 items-center hover:bg-primary-200 p-3 rounded-xl">
-         <div>
+        <div
+          class="flex gap-2 items-center hover:bg-primary-200 p-3 rounded-xl"
+          @click="logout"
+        >
+          <div>
             <h2 class="text-xl font-bold">
               {{ user.name }}
             </h2>
-         </div>
+          </div>
         </div>
       </ElTooltip>
     </div>

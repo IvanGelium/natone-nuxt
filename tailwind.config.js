@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./app/**/*.{vue,js,ts,jsx,tsx}",
-    "./assets/**/*.{vue,js,ts,jsx,tsx}",
-    "./components/**/*.{vue,js,ts,jsx,tsx}",
-    "./layouts/**/*.{vue,js,ts,jsx,tsx}",
-    "./pages/**/*.{vue,js,ts,jsx,tsx}",
+    './app/**/*.{vue,js,ts,jsx,tsx}',
+    './assets/**/*.{vue,js,ts,jsx,tsx}',
+    './components/**/*.{vue,js,ts,jsx,tsx}',
+    './layouts/**/*.{vue,js,ts,jsx,tsx}',
+    './pages/**/*.{vue,js,ts,jsx,tsx}',
   ],
   darkMode: 'class', // или 'media' для системной темы
   theme: {
@@ -79,11 +79,11 @@ export default {
         sans: ['var(--font-family-sans)'],
       },
       fontSize: {
-        xs: 'var(--font-size-xs)',
-        sm: 'var(--font-size-sm)',
-        base: 'var(--font-size-base)',
-        lg: 'var(--font-size-lg)',
-        xl: 'var(--font-size-xl)',
+        'xs': 'var(--font-size-xs)',
+        'sm': 'var(--font-size-sm)',
+        'base': 'var(--font-size-base)',
+        'lg': 'var(--font-size-lg)',
+        'xl': 'var(--font-size-xl)',
         '2xl': 'var(--font-size-2xl)',
         '3xl': 'var(--font-size-3xl)',
       },

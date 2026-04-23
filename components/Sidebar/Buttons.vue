@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRight, Film, House, IceCream, QuartzWatch, ZoomIn } from '@element-plus/icons-vue'
+import { ArrowRight, Film, House, IceCream } from '@element-plus/icons-vue'
 import { ElButton } from 'element-plus'
 
 const props = defineProps<{
@@ -30,14 +30,14 @@ const buttons = [
     label: 'Старфайндер',
     icon: IceCream,
     route: '/starfinder',
-    isReady: false
+    isReady: false,
   },
   {
     name: 'playground',
     label: 'Песочница',
     icon: IceCream,
     route: '/playground',
-    isReady: true
+    isReady: true,
   },
 ]
 

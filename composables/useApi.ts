@@ -1,6 +1,6 @@
 export function useApi() {
   const token = useCookie('auth_token')
-  
+
   return $fetch.create({
     baseURL: '/api',
     onRequest({ options }) {
@@ -11,10 +11,10 @@ export function useApi() {
       }
     },
     onResponseError({ error }) {
-      console.error('Проблема: ',error)
+      console.error('Проблема: ', error)
     },
     onRequestError({ error }) {
       console.error('Сеть недоступна', error)
-    }
+    },
   })
 }

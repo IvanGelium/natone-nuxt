@@ -1,5 +1,4 @@
 import { codeBlock } from '../../../../../utils'
-import Practice from './Practice.vue'
 
 const title = `Type guards`
 const path = `typeGuards`

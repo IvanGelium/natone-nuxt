@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { CreateModalType } from '~/types/utils';
-const props = defineProps < {
-  modalType:CreateModalType
+import type { CreateModalType } from '~/types/utils'
+
+defineProps<{
+  modalType: CreateModalType
 }>()
 </script>
 
@@ -9,5 +10,4 @@ const props = defineProps < {
   <div>
     sd
   </div>
-
 </template>

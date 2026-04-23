@@ -1,25 +1,24 @@
-import type { userRole } from "~/types/utils"
+import type { userRole } from '~/types/utils'
 
-export interface StageDTO  { 
+export interface StageDTO {
   id: string
   title: string
   chapters?: ChapterDTO[]
   createdAt: string
-  updatedAt: string    
+  updatedAt: string
 }
 
-
-export interface Stage  { 
+export interface Stage {
   id: number
   title: string
   chapters?: Chapter[]
   createdAt: Date
-  updatedAt: Date    
+  updatedAt: Date
 }
 
 export interface ChapterDTO {
   id: string
-  title: String
+  title: string
   stageId?: string
   conspects?: ConspectDTO[]
   createdAt: string
@@ -27,7 +26,7 @@ export interface ChapterDTO {
 }
 export interface Chapter {
   id: number
-  title: String
+  title: string
   stageId?: number
   conspects?: Conspect[]
   createdAt: Date
@@ -67,43 +66,43 @@ export interface Practice {
   conspect?: Conspect[]
 }
 
-export interface UserDTO { 
-  id:string
-  name?: string                           
+export interface UserDTO {
+  id: string
+  name?: string
   email: string
   role: string
   createdAt: string
-  updatedAt: string    
-  deletedAt?: string | null 
+  updatedAt: string
+  deletedAt?: string | null
   isActive: boolean
 }
 
-export interface User { 
-  id:number
-  name?: string                           
+export interface User {
+  id: number
+  name?: string
   email: string
   role: userRole
   createdAt: Date
-  updatedAt: Date    
-  deletedAt?: Date  | null
+  updatedAt: Date
+  deletedAt?: Date | null
   isActive: boolean
 }
 
-export interface ShortConspectDTO { 
+export interface ShortConspectDTO {
   id: string
   title: string
 }
-export interface ShortConspect { 
+export interface ShortConspect {
   id: number
   title: string
 }
 
-export interface ShortChapterDTO { 
+export interface ShortChapterDTO {
   id: string
   title: string
   conspects: ShortConspectDTO[]
 }
-export interface ShortChapter { 
+export interface ShortChapter {
   id: number
   title: string
   conspects: ShortConspect[]
@@ -113,12 +112,12 @@ export interface ShortStageDTO {
   id: string
   title: string
   chapters: ShortChapterDTO[]
-} 
+}
 export interface ShortStage {
   id: number
   title: string
   chapters: ShortChapter[]
-} 
+}
 
 export interface NavigationDTO {
   stages: ShortStageDTO[]
@@ -126,4 +125,3 @@ export interface NavigationDTO {
 export interface Navigation {
   stages: ShortStage[]
 }
-

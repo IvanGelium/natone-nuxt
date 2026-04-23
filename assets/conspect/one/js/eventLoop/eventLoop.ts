@@ -1,5 +1,5 @@
-import { codeBlock } from '../../../../../utils'
 import Practice from '../../../../../components/practice/EventLoop.vue'
+import { codeBlock } from '../../../../../utils'
 
 const path = 'eventLoop'
 const title = `Event loop`

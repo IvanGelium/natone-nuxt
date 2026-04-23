@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities; */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
-@import "./var.css";
-@import "./element-theme.css";
-@import "tailwindcss";
+@import './var.css';
+@import './element-theme.css';
+@import 'tailwindcss';
 @config "../../tailwind.config.js";
 
 /* Global scrollbars */
@@ -14,18 +14,18 @@
 }
 
 .scroller::-webkit-scrollbar-thumb {
-    background: transparent;
+  background: transparent;
 }
 .scroller::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 .scroller:hover::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-color-thumb);
+  background: var(--scrollbar-color-thumb);
 }
 .scroller:hover::-webkit-scrollbar-track {
-    background: var(--scrollbar-color-track);
+  background: var(--scrollbar-color-track);
 }
 
 .scroller:hover {
-    --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
+  --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
 }

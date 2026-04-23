@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Delete, Watermelon } from '@element-plus/icons-vue';
+import { Delete, Watermelon } from '@element-plus/icons-vue'
+
 const props = defineProps<{
   header: string
   description: string
@@ -27,9 +28,11 @@ const { header, description } = toRefs(props)
       </div>
     </div>
     <div>
-      <ElButton @click="emit('isEdit')" type="primary">Редактировать</ElButton>
-      <ElButton @click="emit('delete')" :icon="Delete"/>
-      <ElButton @click="emit('hide')" :icon="Watermelon"/>
+      <ElButton type="primary" @click="emit('isEdit')">
+        Редактировать
+      </ElButton>
+      <ElButton :icon="Delete" @click="emit('delete')" />
+      <ElButton :icon="Watermelon" @click="emit('hide')" />
     </div>
   </header>
 </template>

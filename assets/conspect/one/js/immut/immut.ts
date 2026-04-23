@@ -1,5 +1,5 @@
-import { codeBlock } from '../../../../../utils'
 import Practice from '../../../../../components/practice/Immutable.vue'
+import { codeBlock } from '../../../../../utils'
 
 const title = `Immutable-подход`
 const path = 'immut'

@@ -1,5 +1,5 @@
-import type {Conspect, ConspectDTO, Navigation, NavigationDTO} from '@/types/index'
-import { ConspectMapper, NavigationMapper } from '~/types/mapper'
+import type { Navigation, NavigationDTO } from '@/types/index'
+import { NavigationMapper } from '~/types/mapper'
 
 export function useGetNavigation() {
   const api = useApi()
@@ -7,22 +7,24 @@ export function useGetNavigation() {
   const error = ref<string | null>(null)
   const data = ref<Navigation | null>(null)
 
-  const getNavigation = async () => { 
+  const getNavigation = async () => {
     try {
       isFetching.value = true
       error.value = null
-      
+
       const res = await api<NavigationDTO>(`/navigation`, {
         method: 'GET',
       })
       // console.log(res)
       data.value = NavigationMapper.toEntity(res)
-      
-      return { success: true, data: data.value, error:null, isFetching }
-    } catch (e: any) {
+
+      return { success: true, data: data.value, error: null, isFetching }
+    }
+    catch (e: any) {
       console.error(e)
-      return { success: false, data: null, error:e, isFetching }
-    } finally {
+      return { success: false, data: null, error: e, isFetching }
+    }
+    finally {
       isFetching.value = false
     }
   }

@@ -5,7 +5,7 @@ export interface LogMessage {
   message: string
   timestamp: Date
 }
-export type CreateModalType = 'stage'| 'chapter'| 'conspect' | 'practice'
+export type CreateModalType = 'stage' | 'chapter' | 'conspect' | 'practice'
 export interface FakeFetchConfig<T> {
   /** Задержка ответа в миллисекундах (по умолчанию случайная задержка до 5 секунд */
   delay?: number

@@ -2,7 +2,6 @@
 import { Crepe } from '@milkdown/crepe'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/frame.css'
-import { ElButton } from 'element-plus';
 
 const props = defineProps<{
   content?: string
@@ -28,6 +27,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div ref="editorRef" class="milkdown-container"/>
+    <div ref="editorRef" class="milkdown-container" />
   </div>
 </template>

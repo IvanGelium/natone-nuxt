@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { ElButton } from 'element-plus';
-import { Plus, Delete, Edit } from '@element-plus/icons-vue';
-import type { CreateModalType } from '~/types/utils';
-const props = defineProps<{
+import type { CreateModalType } from '~/types/utils'
+import { Plus } from '@element-plus/icons-vue'
+import { ElButton } from 'element-plus'
+
+defineProps<{
   currentPageId: number | null
 }>()
 
+const emit = defineEmits<{
+  (e: 'changePage', pageId: number): void
+  (e: 'openCreateModal', modalType: CreateModalType): void
+}>()
 const getNavigation = useGetNavigation()
 const { data } = await getNavigation()
 
-const emit = defineEmits<{
-  (e: 'changePage', pageId: number): void
-  (e: 'openCreateModal', modalType:CreateModalType): void
-}>()
-
-const literals: CreateModalType[] = ['stage', 'chapter', 'conspect', 'practice'] 
+const literals: CreateModalType[] = ['stage', 'chapter', 'conspect', 'practice']
 const labels = ['Этап', 'Глава', 'Конспект', 'Практика']
 const buttons = literals.map((l, i) => {
-  return { 
+  return {
     label: labels[i],
-    literals: l
+    literals: l,
   }
 })
-
 </script>
 
 <template>
@@ -61,49 +60,53 @@ const buttons = literals.map((l, i) => {
         </div>
       </div> -->
       <div v-if="data" class="flex flex-col gap-4">
-        <div 
-          v-for="stage in data.stages" 
-          :key="`${stage.title}-${stage.id}`" 
+        <div
+          v-for="stage in data.stages"
+          :key="`${stage.title}-${stage.id}`"
           class="flex flex-col gap-2 text-xl"
+        >
+          {{ stage.title }}
+          <div
+            v-for="chapter in stage.chapters"
+            :key="`${chapter.title}-${chapter.id}`"
+            class="flex flex-col gap-2 text-lg px-2 py-2"
           >
-            {{ stage.title }}
-              <div 
-              v-for="chapter in stage.chapters"
-              :key="`${chapter.title}-${chapter.id}`"
-              class="flex flex-col gap-2 text-lg px-2 py-2" 
+            {{ chapter.title }}
+            <div
+              v-for="conspect in chapter.conspects"
+              :key="`${conspect.title}-${conspect.id}`"
+            >
+              <p
+                class="cursor-pointer w-full rounded-lg px-3 py-2 text-left text-sm transition hover:bg-primary-100"
+                :class="currentPageId === conspect.id ? 'bg-primary-400 text-white hover:bg-primary-500' : 'text-secondary'"
+                @click="emit('changePage', conspect.id)"
               >
-                {{ chapter.title }}
-                <div
-                  v-for="conspect in chapter.conspects"
-                  :key="`${conspect.title}-${conspect.id}`" 
-                  >
-                    <p 
-                    class="cursor-pointer w-full rounded-lg px-3 py-2 text-left text-sm transition hover:bg-primary-100"
-                    :class="currentPageId === conspect.id ? 'bg-primary-400 text-white hover:bg-primary-500' : 'text-secondary'"
-                    @click="emit('changePage',conspect.id)"
-                    >
-                    {{ conspect.title }}
-                  </p>
-                </div>
-              </div>
+                {{ conspect.title }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mt-4 w-full flex flex-col gap-4 justify-center">
-          <el-dropdown class="w-full" trigger="click">
-            <el-button class="w-full" :icon="Plus" type="primary">
-              Создать <el-icon class="el-icon--right"><arrow-down /></el-icon>
-            </el-button>
+        <el-dropdown class="w-full" trigger="click">
+          <ElButton class="w-full" :icon="Plus" type="primary">
+            Создать <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon>
+          </ElButton>
 
-            <template class="w-full" #dropdown>
-              <el-dropdown-menu class="w-full">
-                <div class="w-full" v-for="(button,index) in buttons" :key="`${index} - ${button.literals}`">
-                  <el-dropdown-item class="w-full" @click="emit('openCreateModal', button.literals)">
-                    <div class="w-50">{{ button.label }}</div>
-                  </el-dropdown-item>
-                </div>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
+          <template #dropdown>
+            <el-dropdown-menu class="w-full">
+              <div v-for="(button, index) in buttons" :key="`${index} - ${button.literals}`" class="w-full">
+                <el-dropdown-item class="w-full" @click="emit('openCreateModal', button.literals)">
+                  <div class="w-50">
+                    {{ button.label }}
+                  </div>
+                </el-dropdown-item>
+              </div>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </aside>
   </div>

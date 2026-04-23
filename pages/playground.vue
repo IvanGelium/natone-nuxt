@@ -27,9 +27,9 @@ onBeforeUnmount(() => {
     <div class="mt-2 text-2xl font-semibold mb-4">
       Песочница для тестов
     </div>
-    
+
     <!-- Важно: создаем контейнер для редактора и передаем его через ref -->
-    <div ref="editorRef" class="milkdown-container"></div>
+    <div ref="editorRef" class="milkdown-container" />
   </div>
 </template>
 

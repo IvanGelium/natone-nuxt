@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getDocUrl } from '~/utils'
 import githubLogo from '~/assets/github.svg'
+import { getDocUrl } from '~/utils'
 </script>
 
 <template>

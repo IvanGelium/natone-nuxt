@@ -4,13 +4,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (token.value && !user.value) {
     try {
       await fetchMe()
-    } catch {
+    }
+    catch {
       token.value = null
       return navigateTo('/login')
     }
   }
 
-  if (token.value && (to.path == '/login' || to.path == '/signup')) {
+  if (token.value && (to.path === '/login' || to.path === '/signup')) {
     return navigateTo('/')
   }
 })

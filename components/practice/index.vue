@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef, watch } from 'vue'
+
 defineOptions({
-  name: 'LazyPractice'
+  name: 'LazyPractice',
 })
 const props = defineProps<{ practiceName: string }>()
 const selectedComponent = shallowRef()
@@ -9,8 +10,8 @@ const selectedComponent = shallowRef()
 watch(() => props.practiceName, (newName) => {
   if (newName) {
     // Динамический импорт на основе переменной
-    selectedComponent.value = defineAsyncComponent(() => 
-      import(`@/components/practice/${newName}/index.vue`)
+    selectedComponent.value = defineAsyncComponent(() =>
+      import(`@/components/practice/${newName}/index.vue`),
     )
   }
 }, { immediate: true })
@@ -20,6 +21,8 @@ watch(() => props.practiceName, (newName) => {
   <div>
     <!-- Отображаем компонент, если он загружен -->
     <component :is="selectedComponent" v-if="selectedComponent" />
-    <div v-else>Загрузка практики...</div>
+    <div v-else>
+      Загрузка практики...
+    </div>
   </div>
 </template>
