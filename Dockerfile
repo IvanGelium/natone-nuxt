@@ -9,7 +9,8 @@ RUN npm install --include=optional --no-audit --no-fund
 RUN npm install @oxc-parser/binding-linux-x64-gnu --no-save --no-audit --no-fund
 
 COPY . .
-ENV NODE_OPTIONS="--max-old-space-size=1024"
+ENV NUXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN npm run build
 
 FROM node:22-slim
