@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   buildDir: '.nuxt',
   css: ['element-plus/dist/index.css', '@/assets/css/main.css'],
   modules: ['@element-plus/nuxt'],
+  sourcemap: {
+    server: false,
+    client: false,
+  },
   postcss: {
     plugins: {
       '@tailwindcss/postcss': {},
