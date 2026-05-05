@@ -66,12 +66,13 @@ export const NavigationMapper = {
     return {
       id: Number(dto.id),
       title: dto.title,
-      chapters: dto.chapters?.map(NavigationMapper.dtoToChapter),
+      chapters: dto.chapters?.map(NavigationMapper.dtoToChapter) || [],
     }
   },
-  toEntity(dto: NavigationDTO): Navigation {
+  toEntity(dto: NavigationDTO | null | undefined): Navigation {
+    const stages = Array.isArray(dto?.stages) ? dto.stages : []
     return {
-      stages: dto.stages.map(NavigationMapper.dtoToStage),
+      stages: stages.map(NavigationMapper.dtoToStage),
     }
   },
 }

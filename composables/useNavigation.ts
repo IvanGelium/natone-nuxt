@@ -15,8 +15,7 @@ export function useGetNavigation() {
       const res = await api<NavigationDTO>(`/navigation`, {
         method: 'GET',
       })
-      // console.log(res)
-      data.value = NavigationMapper.toEntity(res)
+      data.value = NavigationMapper.toEntity(res || null)
 
       return { success: true, data: data.value, error: null, isFetching }
     }
