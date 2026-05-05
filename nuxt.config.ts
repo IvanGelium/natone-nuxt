@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   routeRules: {
     // Все запросы на /api/** уйдут на бэкенд
     '/api/**': {
-      proxy: `${process.env.API_BASE_URL || 'http://localhost:3000'}/**`,
+      proxy: `${process.env.BASE_API_URL || 'http://localhost:3000'}/**`,
     },
   },
 })
