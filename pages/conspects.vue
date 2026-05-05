@@ -111,11 +111,6 @@ async function handleDelete(entity: 'chapter' | 'stage' | 'conspect', id: number
           </div>
         </div>
         <div v-if="pageData" class="h-full overflow-auto px-6 py-6">
-          <!-- <Page v-if="!isEdit" :practice="!!currentPage?.practice" :content="currentPage?.content" :link="currentLink">
-            <template v-if="currentPage?.practice" #practice>
-              <component :is="currentPage.practice" />
-            </template>
-          </Page> -->
           <Page v-if="!isEdit" :practice="pageData.practice" :content="pageData?.body" />
           <div v-else>
             <ConspectEdit
