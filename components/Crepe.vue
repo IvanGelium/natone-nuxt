@@ -20,6 +20,10 @@ onMounted(async () => {
   }
 })
 
+defineExpose({
+  getContent: () => crepe?.getMarkdown(),
+})
+
 onBeforeUnmount(() => {
   crepe?.destroy()
 })
@@ -27,6 +31,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div ref="editorRef" class="milkdown-container" />
+    <div ref="editorRef" class="milkdown-container border rounded-2xl p-2 border-primary-500" />
   </div>
 </template>

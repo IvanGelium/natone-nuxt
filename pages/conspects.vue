@@ -3,12 +3,6 @@ import type { Conspect } from '~/types'
 import type { CreateModalType } from '~/types/utils'
 import { useGetConspect } from '#imports'
 import Create from '~/components/conspect/Create.vue'
-
-// import type { Component } from 'vue'
-// import { pagesGit } from '~/assets/conspect/one/git'
-// import { pagesJs } from '~/assets/conspect/one/js'
-// import { pagesTs } from '~/assets/conspect/one/ts'
-// import { getDocUrl } from '~/utils'
 import Navigation from '~/components/conspect/Navigation.vue'
 import Page from '~/components/conspect/Page.vue'
 import Header from '~/components/conspect/PageHeader.vue'
@@ -18,6 +12,10 @@ const headerData = {
   description: 'Конспекты и практические задания по базовым технологиям.',
 }
 const isCreateModalOpen = ref(false)
+const isUpdateStageModalOpen = ref(false)
+const updateStageId = ref<null | number>(null)
+const updateChapterId = ref<null | number>(null)
+const isUpdateChapterModalOpen = ref(false)
 const currentModalType = ref<CreateModalType>('stage')
 const getConspect = useGetConspect()
 const currentPageId = ref<number | null>(null)
@@ -44,7 +42,42 @@ const isEdit = ref(false)
 
 async function handleChangePage(conspectId: number) {
   currentPageId.value = conspectId
+  isEdit.value = false
   localStorage.setItem('currentPageId', JSON.stringify(currentPageId.value))
+}
+
+function openUdateModal(id: number, entity: 'chapter' | 'stage') {
+  if (entity === 'chapter') {
+    updateChapterId.value = id
+    isUpdateChapterModalOpen.value = true
+  }
+  if (entity === 'stage') {
+    updateStageId.value = id
+    isUpdateStageModalOpen.value = true
+  }
+}
+
+const deleteStage = useDeleteStage()
+const deleteChapter = useDeleteChapter()
+const deleteConspect = useDeleteConspect()
+
+async function handleDelete(entity: 'chapter' | 'stage' | 'conspect', id: number | null) {
+  if (!id)
+    return
+  try {
+    await ElMessageBox.confirm('Вы уверены что хотите удалить сущность?', 'Подтверждение', { type: 'warning' })
+    if (entity === 'chapter')
+      await deleteChapter(id)
+
+    if (entity === 'stage')
+      await deleteStage(id)
+
+    if (entity === 'conspect')
+      await deleteConspect(id)
+    ElMessage.success('Готово')
+  }
+  catch {
+  }
 }
 </script>
 
@@ -54,7 +87,7 @@ async function handleChangePage(conspectId: number) {
       :header="headerData.header"
       :description="headerData.description"
       @is-edit="isEdit = !isEdit"
-      @delete="isEdit = !isEdit"
+      @delete="handleDelete('conspect', currentPageId)"
       @hide="isEdit = !isEdit"
     />
     <div class="h-full flex-1 min-h-0 grid gap-2 grid-cols-[280px_1fr]">
@@ -65,6 +98,10 @@ async function handleChangePage(conspectId: number) {
           isCreateModalOpen = true
           currentModalType = modalType
         }"
+        @open-update-modal-chapter="(id) => openUdateModal(id, 'chapter')"
+        @open-update-modal-stage="(id) => openUdateModal(id, 'stage')"
+        @delete-chapter="(id) => handleDelete('chapter', id)"
+        @delete-stage="(id) => handleDelete('stage', id)"
       />
 
       <main class="h-full flex min-h-0 flex-col overflow-hidden rounded-2xl border border-primary-200 bg-secondary shadow-sm">
@@ -79,45 +116,12 @@ async function handleChangePage(conspectId: number) {
               <component :is="currentPage.practice" />
             </template>
           </Page> -->
-          <Page v-if="!isEdit" :content="pageData?.body" />
+          <Page v-if="!isEdit" :practice="pageData.practice" :content="pageData?.body" />
           <div v-else>
-            <div class="flex justify-end">
-              <ElButton type="primary">
-                Сохранить
-              </ElButton>
-              <ElButton type="primary" @click="isEdit = !isEdit">
-                Отменить
-              </ElButton>
-            </div>
-            <div>
-              <h2 class="text-xl mb-2">
-                Практика
-              </h2>
-              <el-select
-                v-model="selectedValue"
-                placeholder="Выберите практику"
-                filterable
-                clearable
-                style="width: 240px"
-              >
-                <el-option
-                  v-for="item in fakepractice"
-                  :key="item.id"
-                  :label="item.title"
-                  :value="item.id"
-                />
-              </el-select>
-            </div>
-            <div>
-              <h2 class="text-xl mb-2 mt-10">
-                Заголовок*
-              </h2>
-              <ElInput v-model="pageData.title" placeholder="Укажите заголовок" />
-            </div>
-            <div class="text-xl mb-2 mt-10">
-              <h2>Конспект</h2>
-              <Crepe :content="pageData?.body" />
-            </div>
+            <ConspectEdit
+              :conspect-data="pageData"
+              @close-edit="isEdit = !isEdit"
+            />
           </div>
         </div>
       </main>
@@ -125,7 +129,33 @@ async function handleChangePage(conspectId: number) {
   </div>
   <ElDialog
     v-model="isCreateModalOpen"
+    title="Создание сущности"
   >
-    <Create :modal-type="currentModalType" />
+    <Create
+      :update-id="null"
+      :modal-type="currentModalType"
+      @close-dialog="isCreateModalOpen = false"
+    />
+  </ElDialog>
+
+  <ElDialog
+    v-model="isUpdateStageModalOpen"
+    title="Создание сущности"
+  >
+    <Create
+      :update-id="updateStageId"
+      modal-type="stage"
+      @close-dialog="isUpdateStageModalOpen = false"
+    />
+  </ElDialog>
+  <ElDialog
+    v-model="isUpdateChapterModalOpen"
+    title="Создание сущности"
+  >
+    <Create
+      :update-id="updateChapterId"
+      modal-type="chapter"
+      @close-dialog="isUpdateChapterModalOpen = false"
+    />
   </ElDialog>
 </template>

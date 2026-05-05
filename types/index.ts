@@ -36,8 +36,9 @@ export interface Chapter {
 export interface ConspectDTO {
   id: string
   title: string
-  practiceId?: string
   chapterId?: string
+  practice?: ShortPracticeDTO
+  practiceId?: string
   body: string
   createdAt: string
   updatedAt: string
@@ -47,6 +48,7 @@ export interface Conspect {
   id: number
   title: string
   chapterId?: number
+  practice?: ShortPractice
   practiceId?: number
   body: string
   createdAt: Date
@@ -56,14 +58,14 @@ export interface Conspect {
 export interface PracticeDTO {
   id: string
   title: string
-  conspectId?: string
-  conspect?: ConspectDTO[]
+  conspectId: string | null
+  // conspect?: ConspectDTO[]
 }
 export interface Practice {
   id: number
   title: string
-  conspectId?: number
-  conspect?: Conspect[]
+  conspectId: number | null
+  // conspect?: Conspect[]
 }
 
 export interface UserDTO {
@@ -124,4 +126,13 @@ export interface NavigationDTO {
 }
 export interface Navigation {
   stages: ShortStage[]
+}
+
+export interface ShortPracticeDTO {
+  id: string
+  title: string
+}
+export interface ShortPractice {
+  id: number
+  title: string
 }

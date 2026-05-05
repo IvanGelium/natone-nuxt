@@ -32,7 +32,6 @@ const { header, description } = toRefs(props)
         Редактировать
       </ElButton>
       <ElButton :icon="Delete" @click="emit('delete')" />
-      <ElButton :icon="Watermelon" @click="emit('hide')" />
     </div>
   </header>
 </template>

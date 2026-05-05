@@ -20,6 +20,7 @@ export function useGetConspect() {
       return { success: true, data, error: null, isFetching }
     }
     catch (e: any) {
+      console.error(e)
       error.value = e.response?._data?.message || 'Неизвестная ошибка'
       return { success: false, data: null, error: e, isFetching }
     }
@@ -68,12 +69,11 @@ export function useUpdateConspect() {
   const error = ref<string | null>(null)
   const data = ref<Conspect | null>(null)
 
-  const updateConspect = async (conspectId: number, bodyDomain: Conspect) => {
+  const updateConspect = async (conspectId: number, bodyDomain: Partial<Conspect>) => {
     try {
       const body = ConspectMapper.toDto(bodyDomain)
       isFetching.value = true
       error.value = null
-
       const res = await api<ConspectDTO>(`/conspects/${conspectId}`, {
         method: 'PATCH',
         body,
@@ -84,6 +84,7 @@ export function useUpdateConspect() {
       return { success: true, data: data.value, isFetching }
     }
     catch (e: any) {
+      console.error(e)
       error.value = e.response?._data?.message || 'Неизвестная ошибка'
       return { success: false, data: error.value, isFetching }
     }

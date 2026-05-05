@@ -11,6 +11,8 @@ import type {
   ShortChapterDTO,
   ShortConspect,
   ShortConspectDTO,
+  ShortPractice,
+  ShortPracticeDTO,
   ShortStage,
   ShortStageDTO,
   Stage,
@@ -44,16 +46,80 @@ export const UserMapper = {
   },
 }
 
-export const ConspectMapper = {
-  toEntity(dto: ConspectDTO): Conspect {
+export const NavigationMapper = {
+  dtoToConspect(dto: ShortConspectDTO): ShortConspect {
+    return {
+      id: Number(dto.id),
+      title: dto.title,
+    }
+  },
+
+  dtoToChapter(dto: ShortChapterDTO): ShortChapter {
+    return {
+      id: Number(dto.id),
+      title: dto.title,
+      conspects: dto.conspects?.map(NavigationMapper.dtoToConspect) || [],
+    }
+  },
+
+  dtoToStage(dto: ShortStageDTO): ShortStage {
+    return {
+      id: Number(dto.id),
+      title: dto.title,
+      chapters: dto.chapters?.map(NavigationMapper.dtoToChapter),
+    }
+  },
+  toEntity(dto: NavigationDTO): Navigation {
+    return {
+      stages: dto.stages.map(NavigationMapper.dtoToStage),
+    }
+  },
+}
+
+export const PracticeMapper = {
+  toEntity(dto: PracticeDTO): Practice {
     return {
       ...dto,
       id: Number(dto.id),
+      conspectId: Number(dto.conspectId),
+      // conspect: dto.conspect ? dto.conspect.map(ConspectMapper.toEntity) : [],
+    }
+  },
+  toDto(entity: Partial<Practice>): Partial<PracticeDTO> {
+    const dto: Partial<PracticeDTO> = {
+      title: entity.title || '',
+    }
+    if (entity.id)
+      dto.id = String(entity.id)
+    if (entity.conspectId)
+      dto.conspectId = String(entity.conspectId)
+
+    return dto
+  },
+
+  toEntityShort(dto: ShortPracticeDTO): ShortPractice {
+    return {
+      id: Number(dto.id),
+      title: dto.title,
+    }
+  },
+}
+
+export const ConspectMapper = {
+  toEntity(dto: ConspectDTO): Conspect {
+    const entity: Conspect = {
+      id: Number(dto.id),
       chapterId: Number(dto.chapterId),
+      title: dto.title,
+      body: dto.body,
       practiceId: Number(dto.practiceId),
       createdAt: new Date(dto.createdAt),
       updatedAt: new Date(dto.updatedAt),
     }
+    if (dto.practice)
+      entity.practice = PracticeMapper.toEntityShort(dto.practice)
+
+    return entity
   },
 
   toDto(entity: Partial<Conspect>): Partial<ConspectDTO> {
@@ -68,28 +134,6 @@ export const ConspectMapper = {
       dto.chapterId = String(entity.chapterId)
     if (entity.practiceId)
       dto.practiceId = String(entity.practiceId)
-    return dto
-  },
-}
-
-export const PracticeMapper = {
-  toEntity(dto: PracticeDTO): Practice {
-    return {
-      ...dto,
-      id: Number(dto.id),
-      conspectId: Number(dto.conspectId),
-      conspect: dto.conspect ? dto.conspect.map(ConspectMapper.toEntity) : [],
-    }
-  },
-  toDto(entity: Partial<Practice>): Partial<PracticeDTO> {
-    const dto: Partial<PracticeDTO> = {
-      title: entity.title || '',
-    }
-    if (entity.id)
-      dto.id = String(entity.id)
-    if (entity.conspectId)
-      dto.conspectId = String(entity.conspectId)
-
     return dto
   },
 }
@@ -132,35 +176,5 @@ export const StageMapper = {
       title: entity.title || '',
     }
     return dto
-  },
-}
-
-export const NavigationMapper = {
-  dtoToConspect(dto: ShortConspectDTO): ShortConspect {
-    return {
-      id: Number(dto.id),
-      title: dto.title,
-    }
-  },
-
-  dtoToChapter(dto: ShortChapterDTO): ShortChapter {
-    return {
-      id: Number(dto.id),
-      title: dto.title,
-      conspects: dto.conspects.map(NavigationMapper.dtoToConspect),
-    }
-  },
-
-  dtoToStage(dto: ShortStageDTO): ShortStage {
-    return {
-      id: Number(dto.id),
-      title: dto.title,
-      chapters: dto.chapters.map(NavigationMapper.dtoToChapter),
-    }
-  },
-  toEntity(dto: NavigationDTO): Navigation {
-    return {
-      stages: dto.stages.map(NavigationMapper.dtoToStage),
-    }
   },
 }

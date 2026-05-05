@@ -1,5 +1,3 @@
-import Practice from './PromiseCombinators.vue'
-
 const path = 'promiseCombinators'
 
 const title = `Promise combinators`
@@ -44,5 +42,5 @@ export const promiseCombinatorsData = {
   path,
   title,
   content: paragraph,
-  practice: Practice,
+  // practice: Practice,
 }
