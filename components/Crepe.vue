@@ -11,6 +11,17 @@ const editorRef = ref<HTMLDivElement | null>(null)
 let crepe: Crepe | null = null
 let editableElement: HTMLElement | null = null
 
+function decodeHtmlEntities(value: string) {
+  const textarea = document.createElement('textarea')
+  textarea.innerHTML = value
+  return textarea.value
+}
+
+function normalizePastedMarkdown(value: string) {
+  return decodeHtmlEntities(value)
+    .replace(/\\([\\`*_{}[\]()#+\-.!])/g, '$1')
+}
+
 function handlePaste(event: ClipboardEvent) {
   if (!crepe)
     return
@@ -18,9 +29,9 @@ function handlePaste(event: ClipboardEvent) {
   const text = event.clipboardData?.getData('text/plain')
   if (!text)
     return
-
   event.preventDefault()
-  crepe.editor.action(insert(text))
+  const insertedText = insert(normalizePastedMarkdown(text))
+  crepe.editor.action(insertedText)
 }
 
 onMounted(async () => {
@@ -32,7 +43,7 @@ onMounted(async () => {
 
     await crepe.create()
     editableElement = editorRef.value.querySelector('[contenteditable="true"]')
-    editableElement?.addEventListener('paste', handlePaste)
+    // editableElement?.addEventListener('paste', handlePaste)
   }
 })
 
