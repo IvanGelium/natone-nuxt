@@ -22,7 +22,7 @@ function checkPassword() {
   }
 }
 async function WIPfetch() {
-  await fetch('/api/user', {
+  await fetch('/api/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
