@@ -8,9 +8,6 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prepare": "husky || true"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
