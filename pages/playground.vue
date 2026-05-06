@@ -20,6 +20,26 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   crepe?.destroy()
 })
+
+const diagram = `
+graph TD
+  Start([Начало задачи]) --> Pull[git pull origin main]
+  Pull --> Branch[git checkout -b task/name]
+  Branch --> Code[Написание кода]
+  Code --> Commit[git commit -m '...']
+  Commit --> Conflicts{Есть конфликты?}
+  
+  Conflicts -- Да --> Rebase[git rebase main]
+  Rebase --> Resolve[Разрешение конфликтов]
+  Resolve --> Push
+  
+  Conflicts -- Нет --> Push[git push origin branch]
+  Push --> MR[Создание Merge Request]
+  MR --> End([Готово к ревью])
+
+  style Start fill:#f9f,stroke:#333,stroke-width:2px
+  style End fill:#bbf,stroke:#333,stroke-width:2px
+`
 </script>
 
 <template>
@@ -30,6 +50,13 @@ onBeforeUnmount(() => {
 
     <!-- Важно: создаем контейнер для редактора и передаем его через ref -->
     <div ref="editorRef" class="milkdown-container" />
+  </div>
+
+  <div>
+    <ClientOnly>
+      <h1>Git-flow</h1>
+      <VueMermaidString :value="diagram" />
+    </ClientOnly>
   </div>
 </template>
 
