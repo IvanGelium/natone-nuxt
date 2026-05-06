@@ -39,7 +39,7 @@ const practiceComponent = computed(() => {
     <div class="h-full flex flex-col gap-4">
       <Mdblock content="### Конспект" />
       <Mdblock :content="content" />
+      <div class="min-h-50" />
     </div>
-    <div class="min-h-50" />
   </div>
 </template>

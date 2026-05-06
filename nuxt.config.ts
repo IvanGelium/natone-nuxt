@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      githubRepoUrl: process.env.NUXT_PUBLIC_GITHUB_REPO_URL || '',
+      githubRepoUrl: 'https://github.com/IvanGelium/natone-nuxt',
       baseApiUrl: process.env.BASE_API_URL || '',
     },
   },
