@@ -51,6 +51,7 @@ export const NavigationMapper = {
     return {
       id: Number(dto.id),
       title: dto.title,
+      orderIndex: Number(dto.orderIndex),
     }
   },
 
@@ -58,6 +59,7 @@ export const NavigationMapper = {
     return {
       id: Number(dto.id),
       title: dto.title,
+      orderIndex: Number(dto.orderIndex),
       conspects: dto.conspects?.map(NavigationMapper.dtoToConspect) || [],
     }
   },
@@ -66,6 +68,7 @@ export const NavigationMapper = {
     return {
       id: Number(dto.id),
       title: dto.title,
+      orderIndex: Number(dto.orderIndex),
       chapters: dto.chapters?.map(NavigationMapper.dtoToChapter) || [],
     }
   },

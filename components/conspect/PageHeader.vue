@@ -13,6 +13,10 @@ const emit = defineEmits<{
 }>()
 
 const { header, description } = toRefs(props)
+const isAdmin = ref(false)
+watch(isAdminStore.isAdmin, (isIt) => {
+  isAdmin.value = isIt
+})
 </script>
 
 <template>
@@ -27,7 +31,7 @@ const { header, description } = toRefs(props)
         </p>
       </div>
     </div>
-    <div>
+    <div v-if="isAdmin">
       <ElButton type="primary" @click="emit('isEdit')">
         Редактировать
       </ElButton>

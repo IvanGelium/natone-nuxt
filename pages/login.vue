@@ -18,17 +18,18 @@ async function handleLogin() {
   }
   ElMessage.error(`Ошибка: ${error}`)
 }
+const keyInput = ref('')
 </script>
 
 <template>
   <div class="h-screen bg-primary-50 w-full flex justify-center items-center">
-    <div class="w-100 bg-white p-4 rounded">
+    <div class="w-100 flex flex-col gap-2 bg-white p-4 rounded">
       <div class="h-full flex mb-4">
         <h1 class="text-xl font-bold text-primary-500">
           Вход
         </h1>
       </div>
-      <div class="flex flex-col gap-4">
+      <!-- <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
           <p class="text-xs opacity-50">
             Логин*
@@ -65,7 +66,19 @@ async function handleLogin() {
         <NuxtLink to="/">
           Вернуться
         </NuxtLink>
+      </div> -->
+      <div class="flex flex-col gap-2">
+        <p class="font-bold">
+          KEY:
+        </p>
+        <ElInput v-model="keyInput" />
       </div>
+      <ElButton type="primary" class="self-end" @click="isAdminStore.setisAdmin(keyInput)">
+        Вход
+      </ElButton>
+      <NuxtLink to="/">
+        Вернуться
+      </NuxtLink>
     </div>
   </div>
 </template>

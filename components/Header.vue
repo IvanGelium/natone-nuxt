@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const { user, logout } = (useAuth())
+const { logout } = (useAuth())
+const keyInput = ref('')
+const isAdmin = ref(false)
+
+function loginKinda() {
+  isAdminStore.setisAdmin(keyInput.value)
+  isAdmin.value = isAdminStore.isAdmin.value
+}
 </script>
 
 <template>
@@ -7,9 +14,20 @@ const { user, logout } = (useAuth())
     <div class="logo font-extrabold text-xl">
       Основы Frontend-разработки - практика
     </div>
-    <div v-if="!user">
-      <ElButton type="primary" @click="navigateTo('/login')">
+    <div v-if="!isAdmin" class="flex gap-2 items-center">
+      <!-- <ElButton type="primary" @click="navigateTo('/login')">
         Войти
+      </ElButton> -->
+      <div class="flex gap-2 items-center">
+        <p class="font-bold">
+          KEY:
+        </p>
+        <ElInput v-model="keyInput" />
+      </div>
+      <ElButton
+        type="primary" class="self-end" @click="loginKinda"
+      >
+        Вход
       </ElButton>
     </div>
     <div v-else class="mr-4">
@@ -20,7 +38,7 @@ const { user, logout } = (useAuth())
         >
           <div>
             <h2 class="text-xl font-bold">
-              {{ user.name }}
+              {{ 'АДМИН' }}
             </h2>
           </div>
         </div>

@@ -20,6 +20,8 @@ export default defineNuxtConfig({
     public: {
       githubRepoUrl: 'https://github.com/IvanGelium/natone-nuxt',
       baseApiUrl: process.env.BASE_API_URL || '',
+      keySecret: process.env.KEY_SECRET || 'дефолтный_пароль',
+
     },
   },
   routeRules: {

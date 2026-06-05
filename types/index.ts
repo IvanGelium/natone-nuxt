@@ -93,31 +93,37 @@ export interface User {
 export interface ShortConspectDTO {
   id: string
   title: string
+  orderIndex: string
 }
 export interface ShortConspect {
   id: number
   title: string
+  orderIndex: number
 }
 
 export interface ShortChapterDTO {
   id: string
   title: string
+  orderIndex: string
   conspects: ShortConspectDTO[]
 }
 export interface ShortChapter {
   id: number
   title: string
+  orderIndex: number
   conspects: ShortConspect[]
 }
 
 export interface ShortStageDTO {
   id: string
   title: string
+  orderIndex: string
   chapters: ShortChapterDTO[]
 }
 export interface ShortStage {
   id: number
   title: string
+  orderIndex: number
   chapters: ShortChapter[]
 }
 
