@@ -2,10 +2,17 @@
 const { logout } = (useAuth())
 const keyInput = ref('')
 const isAdmin = ref(false)
+const { public: { baseApiUrl } } = useRuntimeConfig()
 
-function loginKinda() {
-  isAdminStore.setisAdmin(keyInput.value)
-  isAdmin.value = isAdminStore.isAdmin.value
+async function keyLogin() {
+  const res = await $fetch(`/api/auth/key`, {
+    method: 'POST',
+    body: { key: keyInput.value },
+  })
+  if (res.access === 'granted') {
+    isAdminStore.isAdmin.value = true
+    isAdmin.value = isAdminStore.isAdmin.value
+  }
 }
 </script>
 
@@ -25,7 +32,7 @@ function loginKinda() {
         <ElInput v-model="keyInput" />
       </div>
       <ElButton
-        type="primary" class="self-end" @click="loginKinda"
+        type="primary" class="self-end" @click="keyLogin"
       >
         Вход
       </ElButton>
